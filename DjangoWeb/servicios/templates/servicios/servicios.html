@@ -1,0 +1,45 @@
+
+ <!-- Aqui heredamos de base.html -->
+{% extends "ProyectoWebApp/base.html" %}
+
+
+{% load static %} <!-- Esta instruccion esta en el padre pero no se hereda, recordar llamar nuevamente para llamar a la carpeta static-->
+
+{%block content %}
+
+	{% for servicio in servicios %}
+
+
+<!-- Esta parte del codigo fue copioada de home.html, estamos emulando el estilo de ese template y cambiando algunos parametros para que quede mejor, tener en
+cuenta que el codigo de abajo es una version anterior y otra forma de poner imagenes de la base de datos en la pag web-->
+	<section class="page-section clearfix">
+    	<div class="container">
+      		<div class="intro">
+        		<img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{servicio.imagen.url}}" alt="" style="width: 50%;">
+        		<div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          			<h2 class="section-heading mb-4" >
+            			<span class="section-heading-lower">{{servicio.titulo}}</span>
+            			<span class="section-heading-upper">{{servicio.contenido}}</span>
+          			</h2>
+        		</div>
+      		</div>
+    	</div>
+  	</section>
+
+
+<!--El codigo que esta comnentado pertenbece a una version anterior para mostrar las iamagenes de la base de datos, el codigo de arriba es una copia modificada
+	del codigo del template home que uso para su imagen y letra ( en el url home).
+<div> <p>
+	
+	<h2 style="color: white;">{{servicio.titulo}}</h2>
+	<p style="color: white;"> {{servicio.contenido}}</p>
+
+	#comentado#<p><img src="{{servicio.imagen}}"></p>       Deberia ser asi pero esto no va a funcionar ya que nuestra imagen no esta en /servicios/ sino en /proyectoseb/media para corregir hace lo siguiente  (NOTA: Para ver una imagen del navegador normalmnete se da antiolick y ver en nueva pestaña) #comentado#
+
+	<p><img src="{{servicio.imagen.url}}"></p>
+
+</p> </div>
+-->
+	{% endfor %}
+
+{% endblock %}

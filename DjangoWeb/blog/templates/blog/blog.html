@@ -1,0 +1,60 @@
+
+ <!-- Aqui heredamos de base.html -->
+{% extends "ProyectoWebApp/base.html" %}
+
+
+{% load static %} <!-- Esta instruccion esta en el padre pero no se hereda, recordar llamar nuevamente para llamar a la carpeta static-->
+
+{%block content %}
+	{% for post in posts %}
+
+	<section class="page-section clearfix">
+    	<div class="container">
+      		<div class="intro">
+        		<img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{post.imagen.url}}" alt="" style="width: 50%;">
+        		<div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          			<h2 class="section-heading mb-4" >
+            			<span class="section-heading-lower">{{post.titulo}}</span>
+            			<span class="section-heading-upper">{{post.contenido}}</span>
+          			</h2>
+
+          			<!--Aqui añadiremos el autor en una esquina inferior izquierda y le daremos un poco de estilp-->
+          			<div style="text-align: left; font-size: 0.8em;">
+          				Autor: {{post.autor}}
+          				
+          			</div> 
+        		</div>
+      		</div>
+    	</div>
+  	</section>
+
+  	
+
+  	<!--Aqui diseñaremos una forma de que los posts se ordenen por categorias, primero crearremos una caja donde iran los hiperlinks de estas categorias
+  		lo que se esta ahciendo aqui es poner una caja que ocupoe 75% de la ´panmtalla yn este centrada para saber el tamaño exacto de esta
+  		caha podemos usar "background-color" en estilos para que pinte toda la caja-->
+  	<section>
+  		<div style="width: 75%; margin: auto;text-align: center;color: white;">
+  			<!--Aqui dentro del mismo for que recorre los posts (de mas arriba) se usa otro for para recorrer las categorias de cada ppost 
+  				, tener en cuenta que categoria es un atributo de otra clase (categoria) llamado con llave foranea, 
+  				por ello tiene un atributo llamado nombre (nota, el tipo de dato obtenido de [post.categorias.all] es un query) -->
+  			Categorias:
+  			
+  			{% for categoria in post.categorias.all %}
+  				<a href="{% url 'categoria' categoria.id %}" class="linksCategorias"> {{categoria.nombre}}</a>&nbsp;&nbsp;&nbsp; 
+          <!-- Con esto creamos un link hacia el url categoria y como url dinamica le pasamos el id de la categoria
+            algo mas que se hara aqui es cambiar el estilo de los links, derivado de las hojas css que se usaron, 
+            para cambiarlo a color blanco y subrayado nos vamos a la carpeta css archivoi " gestion.css" al fina, luego asigna
+            mos la clase o class a este link/href ....-->
+
+
+  			{%endfor%}
+  				 
+  			
+  		</div>
+  	</section>
+  	{%endfor%}
+
+{% endblock %}
+
+

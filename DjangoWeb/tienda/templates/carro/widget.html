@@ -1,0 +1,64 @@
+<table class="table table-bordered" style="color: white">
+	<thead> <!--cabecera-->
+		<tr>
+			<th colspan="3" class="text-center"> <!--Aqui en la cabecera las columnas deberan ser 3 pero combinadas con texto centrado-->
+				Carro Compras	
+
+			</th>
+
+		</tr>
+		<tr> <!-- Aqui va la segunda fila de la cabecera esta tendra tres columnas -->
+			<th>Producto</th>
+			<th>Cantidad</th>
+			<th>Suma</th>
+			
+		</tr>
+
+	</thead>
+	<tbody>
+		<!--Si hay algun elemento en el carro (carro es un diccionario): ... -->
+		{% if request.session.carro.items %}
+			{% for key, value in request.session.carro.items %} <!-- Recorremos como lo hicimos en carro.py de la app carro notar que en codigo django en tempaltes las funciones se llaman sin (), aqui debe aprecer los productos segun vamos añadiendolos con el boton creado en tienda.html-->
+			<tr class="text-center">
+				<td>{{value.nombre}}</td> <!--Este value corrersponde a la variable que usa para recorrer los valores del diccionario-->
+				<td>{{value.cantidad}}</td>
+				<td>
+					<a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sm btn-success">+</a>
+					<a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sm btn-success">-</a><br/>
+
+					{{value.precio}} S/.
+
+
+
+				</td>
+			</tr>
+
+			{% endfor %}
+
+		{%else%} <!--En caso no haya nada en el carro saldra una advertencia... -->
+			<tr>
+				<td colspan="3">
+					<div class="alert alert-danger text-center">
+						Sin Productos!!							
+
+					</div>
+				</td>
+
+			</tr>
+
+		{% endif%}
+	</tbody>
+
+	<tfoot>
+		<tr >
+			<td colspan="3">
+			
+				Total: {{importe_total_carro}}
+			</td>
+			
+			
+		</tr>
+
+	</tfoot>
+
+</table>

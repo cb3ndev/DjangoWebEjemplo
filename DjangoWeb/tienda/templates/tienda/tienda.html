@@ -1,0 +1,58 @@
+
+ <!-- Aqui heredamos de base.html --> 
+{% extends "ProyectoWebApp/base.html" %}
+
+
+{% load static %} <!-- Esta instruccion esta en el padre pero no se hereda, recordar llamar nuevamente para llamar a la carpeta static-->
+
+{%block content %}
+<!-- Segun la info de bootstrap sobre cards, para esta estructura se hace un container, dentro de este luego un row (filas) y finalmente un col (de columnas) -->
+
+<div class="container">
+	<!--Debajo del container antes del row y el for debemos poner un espacio que se acomdara a la derecha de nuestros productos
+	este espacio debe ser para el carro, para ello crearemos tro iv con un style float rigth
+	Esto hara que nuestro carro se ponga siempre a la dreecha, ero o solo eso sino que sea responsivo, es decir, los roductos 
+	se iran alineando si la pantalla es pequeña pero el carro empre aparecera en pantalla hacia la derecha-->
+	<div style="float: right;">
+		<p style="color: white;">Total: {{importe_total_carro}}</p> <!--Aqui ponemos la variable global importe_total_carro que se
+																		definio en context_processor.py-->
+		{% include "carro/widget.html"%} <!--Aqui llamamos a un template de esta misma app, este es un cuadro, 
+		simplemente sera incluido aqui, ver widget.html para mas info-->
+	</div>
+	<div class="row">
+
+		{% for producto in productos %}
+
+		<div class= "col-md-3"> <!--podriamos poner solo "col" pero eso haria que nuestras imagenes las cargue en una sola columna, para
+			corregirlo  el sistema de bootstrap se basa en un número limitado de 12 columnas, por lo tanto cuando has puesto col-3, le estás indicando a bootstrap que una columna quieres que ocupe el espacio de 3 columnas, por lo tanto como tienes 5 productos 5x3 = 15, que hace bootstrap? todo lo que pase de 12, lo envía a la fila siguiente. 
+
+			(edito) Esto es por si me he explicado mal:
+			Si pusieses col-6, en vez de col-3, te aparecerian 2 productos por fila
+			Si pusieses col-12, solo 1
+			Y ahora la gente se puede preguntar y que pasa si pongo col-5?
+			Aparecerian 2 productos por fila, porque al sumar 10+5 sobrepasa las 12 columnas-->
+	
+			<div class="card" style="width: 100%; margin: 5px 5px;"> <!--Aqui estamos utilizando una	clase propia de bootstrap que pone un marco de esquinas 	redondeadas a 	las imagenes como si fueran tarjetas, ademas de eso le aplicamos un estilo de margin arriba y abajo, por ponerlo seguido:
+				5px 5px, se sobreentiende que es arriba ya abajo, si solo ponemos 5px, lo hace para los cuatro costados-->
+				<img class="card-img-top" src="{{producto.imagen.url}}">
+				<div class="card-body" style="text-align: center;">
+					
+					<h7 class="card-title">{{producto.nombre}}</h7>
+					<p class="card-text">{{producto.precio}} &nbsp; S/.</p>
+				</div>
+
+				<!--Queremos crear un boton para agregar y quitar productos, eso lo hacemos en el footer dentro de las tarjeta pero 
+					fuera del card-body-->
+				<div class="card-footer text-center">
+					<!--Aqui en este boton agregarenmos la funcionalidad para agregar productos, ver urls para entender carro:agregar -->
+					<a href="{% url 'carro:agregar' producto.id %}" class="btn btn-success">Agregar al carro</a>
+					
+
+				</div>
+			</div> <!--card que se cierra-->
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+
+ <!-- Aqui heredamos de base.html -->
+{% extends "ProyectoWebApp/base.html" %}
+
+
+{% load static %} <!-- Esta instruccion esta en el padre pero no se hereda, recordar llamar nuevamente para llamar a la carpeta static-->
+
+{%block content %}
+<!--Llamamos el nombnre clabve de la variable contexto, esto hara que el objeto tipo formulario que creamos en vies aparezca aqui, notar que para que el form funcione as_table debe estar entre etiquetas table, las form en django ´pueden ser as_p, as_ul o as_table-->
+
+<div class="contenedorFormulario">
+	<!--Con este if manadaremos un mensaje en la pagina cuando el user haya enviado data atraves del form y sea valido
+	 en ese caso la palbra valido que usamos en view aparecera en el diccionario {{request.GET}} y la condicional if sera true-->
+	{% if "valido" in request.GET %}
+
+		<p style="color: white;">Se ha enviado correctamente el formulario!!!!</p>
+		<!--<P> {{request.GET}}</P>-->
+
+
+	{% endif %}
+	<!--La sgte. linea sirve para crear el formulario como tal, ya que sin esto no es mas 
+		que una tabla comun con espacios llenables que no son enviados a ningun lado
+		tambien debemos crear el boton de enviar.
+		Una cosa mas a tomar en cuenta es que el metodo de envio es atraves de POST, esto quiere decir que lo enviado no ser atraves 
+		de la URL como el metodo GET, lo que sea enviado en el formulario puede ser recuperado a traves de {{request.post}}, en forma de diccionario-->
+	<form action="" method="POST" style="text-align: center;">
+		{% csrf_token %} <!-- token de seguridad que implementa una especie de codigo entregada por el mismo programa o framework, si no coincide saldra un error, esto sirve para que no puedan manipular nuetsro formulario desde externos por ejemplo, o cun un bot-->
+		<table style="color: white; margin: 20px auto;"> {{ miFormulario.as_table }}</table>
+		<input type="submit" value="Enviar!" style="width: 150px;">
+
+	</form>
+
+</div>
+<!--Para darle estilos lo mejor es hacerlo desde el aerchivo gestion.css, nos iremos ahi -->
+
+
+{% endblock %}
