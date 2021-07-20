@@ -80,7 +80,7 @@ p {
 }
 
 #mainNav {
-  background-color: rgba(24, 64, 8);
+  background-color: rgba(56, 31, 120);
   font-family: 'Raleway';
 }
 
@@ -134,7 +134,7 @@ p {
     left: 600;
     width: 60%;
     margin-top: 3rem;
-    background-color: rgba(24, 64, 8);
+    background-color: rgba(56, 31, 120);
     color: cornsilk;
     position: absolute;
   }
@@ -155,14 +155,14 @@ p {
 .cta {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  background-color: rgb(242, 245, 240);
+  background-color: rgb(96, 130, 74);
 }
 
 .cta .cta-inner {
   position: relative;
   padding: 3rem;
   margin: 0.5rem;
-  background-color: rgba(24, 64, 8);
+  background-color: rgba(56, 31, 120);
   color: cornsilk;
 }
 
@@ -229,7 +229,7 @@ p {
 }
 
 .footer {
-   background-color: rgba(24, 64, 8, 0.8);
+   background-color: rgba(56, 31, 120, 0.8);
 }
 
 
@@ -295,7 +295,7 @@ ul.errorlist{
 
 .contenedorFormulario{ /*A nuestri formuklario queremos darle el estilo de la pagina, para eso buscamos en esta misma pagina tales estilos*/
   
-  background-color: rgba(24, 64, 8);
+  background-color: rgba(56, 31, 120);
   width: 50%;
   margin: 10px auto;  /*Aqui no solo se centra con auto sino que se da un margen superior e
   inferior de 10 pixeles entre el navbar y el pie de pagina*/
